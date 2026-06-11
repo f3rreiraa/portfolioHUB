@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>portfolioHUB — Víctor Hugo Ferreira Matos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0d;
+      --surface: #161616;
+      --surface2: #1e1e1e;
+      --accent: #c8f135;
+      --accent2: #8fb820;
+      --text: #f0f0f0;
+      --muted: #888;
+      --border: #2a2a2a;
+      --display: 'Space Grotesk', sans-serif;
+      --body: 'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 3rem;
+      background: rgba(13,13,13,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 6rem 3rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      gap: 4rem;
+    }
+
+    .hero-text { flex: 1; }
+
+    .hero-eyebrow {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-family: var(--display);
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.2rem;
+    }
+
+    h1 .accent { color: var(--accent); }
+
+    .hero-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 480px;
+      margin-bottom: 2.4rem;
+      line-height: 1.8;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: #0d0d0d;
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 0.85rem 1.8rem;
+      border-radius: 4px;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .hero-cta:hover { background: var(--accent2); transform: translateY(-1px); }
+
+    .hero-contact {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .hero-contact span {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .hero-contact span strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .hero-visual {
+      flex: 0 0 280px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+    }
+
+    .skill-card-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .skill-bar-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .skill-row {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .skill-name {
+      font-size: 0.78rem;
+      font-weight: 500;
+      min-width: 90px;
+      color: var(--text);
+    }
+
+    .bar-bg {
+      flex: 1;
+      height: 3px;
+      background: var(--border);
+      border-radius: 2px;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    /* SECTIONS */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 3rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .section-num {
+      font-family: var(--display);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+    }
+
+    h2 {
+      font-family: var(--display);
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    /* SOBRE */
+    .about-text {
+      max-width: 700px;
+      color: #c0c0c0;
+      font-size: 1rem;
+      line-height: 1.9;
+    }
+
+    /* EXPERIÊNCIA */
+    .timeline { display: flex; flex-direction: column; gap: 1.6rem; }
+
+    .timeline-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.6rem 1.8rem;
+      position: relative;
+      border-left: 3px solid var(--accent);
+    }
+
+    .timeline-role {
+      font-family: var(--display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    .timeline-meta {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 0.9rem;
+    }
+
+    .timeline-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .timeline-list li {
+      font-size: 0.88rem;
+      color: #aaa;
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .timeline-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.7rem;
+      top: 2px;
+    }
+
+    /* PROJETOS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.6rem;
+      transition: border-color 0.2s;
+    }
+
+    .project-card:hover { border-color: var(--accent); }
+
+    .project-title {
+      font-family: var(--display);
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .project-desc {
+      font-size: 0.85rem;
+      color: #999;
+      margin-bottom: 1rem;
+      line-height: 1.7;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 0.2rem 0.6rem;
+      border-radius: 3px;
+      background: rgba(200, 241, 53, 0.1);
+      color: var(--accent);
+      border: 1px solid rgba(200, 241, 53, 0.2);
+    }
+
+    /* HABILIDADES */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+
+    .skill-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.4rem;
+    }
+
+    .skill-block-area {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .skill-block-name {
+      font-family: var(--display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+
+    .skill-block-level {
+      font-size: 0.78rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* CERTIFICAÇÕES */
+    .certs-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .cert-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1rem 1.4rem;
+    }
+
+    .cert-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .cert-meta {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    /* RECOMENDAÇÕES */
+    .rec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .rec-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.8rem;
+      position: relative;
+    }
+
+    .rec-quote {
+      font-size: 2.5rem;
+      color: var(--accent);
+      font-family: var(--display);
+      line-height: 1;
+      margin-bottom: 0.8rem;
+    }
+
+    .rec-text {
+      font-size: 0.88rem;
+      color: #bbb;
+      line-height: 1.8;
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+
+    .rec-author {
+      font-size: 0.78rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2.5rem 3rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    footer span { color: var(--accent); }
+
+    /* IDIOMAS */
+    .lang-row {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .lang-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.2rem 1.6rem;
+      min-width: 160px;
+    }
+
+    .lang-name {
+      font-family: var(--display);
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    .lang-level { font-size: 0.82rem; color: var(--muted); }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.2rem; }
+      nav ul { display: none; }
+      .hero { flex-direction: column; padding: 5rem 1.2rem 3rem; gap: 2.5rem; }
+      .hero-visual { flex: unset; width: 100%; }
+      section { padding: 3rem 1.2rem; }
+      .cert-item { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">portfolio<span>HUB</span></div>
+    <ul>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#experiencia">Experiência</a></li>
+      <li><a href="#projetos">Projetos</a></li>
+      <li><a href="#habilidades">Habilidades</a></li>
+      <li><a href="#certs">Certificações</a></li>
+      <li><a href="#rec">Recomendações</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Engenharia de Software · CEUB · 2026</div>
+      <h1>Víctor Hugo<br><span class="accent">Ferreira Matos</span></h1>
+      <p class="hero-sub">Estudante de Engenharia de Software com foco em desenvolvimento de sistemas, análise de dados e soluções tecnológicas orientadas a resultados.</p>
+      <a href="#sobre" class="hero-cta">Ver portfólio ↓</a>
+      <div class="hero-contact">
+        <span>✉ <strong>vhf.matos123@gmail.com</strong></span>
+        <span>☎ <strong>+55 61 99350-7238</strong></span>
+        <span>📍 <strong>Brasília – DF, Brasil</strong></span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="skill-card">
+        <div class="skill-card-label">Linguagens</div>
+        <div class="skill-bar-wrap">
+          <div class="skill-row">
+            <span class="skill-name">C++</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:30%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">Python</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:30%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">Java</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:30%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">SQL</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:30%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">Power BI</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:30%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">Git / GitHub</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:30%"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-label">Idiomas</div>
+        <div class="skill-bar-wrap">
+          <div class="skill-row">
+            <span class="skill-name">Português</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:100%"></div></div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">Inglês</span>
+            <div class="bar-bg"><div class="bar-fill" style="width:50%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOBRE -->
+  <section id="sobre">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2>Perfil Pessoal</h2>
+    </div>
+    <p class="about-text">
+      Estudante de Engenharia de Software no 1º semestre, com forte interesse em desenvolvimento de sistemas, análise de dados e soluções tecnológicas orientadas a resultados. Busco constantemente aprimorar meus conhecimentos em programação, banco de dados e ferramentas analíticas, aliando aprendizado acadêmico à prática.
+      <br><br>
+      Tenho como objetivo iniciar minha trajetória profissional na área de tecnologia, contribuindo com dedicação, organização e comprometimento, ao mesmo tempo em que desenvolvo minhas habilidades técnicas e adquiro experiência em ambientes desafiadores. Pretendo evoluir como profissional, construindo uma base sólida que me permita atuar com excelência no desenvolvimento de soluções eficientes e inovadoras.
+    </p>
+  </section>
+
+  <!-- EXPERIÊNCIA -->
+  <section id="experiencia">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2>Experiência Profissional</h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-role">Assistente de Almoxarifado</div>
+        <div class="timeline-meta">Exército Brasileiro · 2023 – 2024 · 1 ano · Brasília, DF</div>
+        <ul class="timeline-list">
+          <li>Controle e organização de estoque de materiais e insumos.</li>
+          <li>Registro de entradas/saídas e movimentação de almoxarifado.</li>
+          <li>Trabalho em equipe sob hierarquia e procedimentos militares.</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-role">Editor de Vídeo</div>
+        <div class="timeline-meta">Freelancer – Autônomo · Período variável · Remoto</div>
+        <ul class="timeline-list">
+          <li>Edição e pós-produção de vídeos para clientes.</li>
+          <li>Organização de arquivos digitais e cumprimento de prazos.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETOS -->
+  <section id="projetos">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2>Projetos</h2>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-title">portfolioHUB — Portfólio Digital</div>
+        <p class="project-desc">Portfólio profissional desenvolvido com Git/GitHub como entrega da disciplina Bootcamp (CEUB). Envolve planejamento de estrutura, produção de conteúdo e publicação online.</p>
+        <div class="tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">Git</span>
+          <span class="tag">GitHub</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-title">Algoritmos e Lógica de Programação</div>
+        <p class="project-desc">Implementação de exercícios em C++, Python e Java cobrindo estruturas de dados, controle de fluxo, funções e fundamentos de orientação a objetos.</p>
+        <div class="tags">
+          <span class="tag">C++</span>
+          <span class="tag">Python</span>
+          <span class="tag">Java</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HABILIDADES -->
+  <section id="habilidades">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2>Habilidades e Competências</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-block">
+        <div class="skill-block-area">Programação</div>
+        <div class="skill-block-name">C++, Python, Java</div>
+        <div class="skill-block-level">Nível Básico</div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-block-area">Banco de Dados</div>
+        <div class="skill-block-name">SQL, Modelagem Relacional</div>
+        <div class="skill-block-level">Nível Básico</div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-block-area">Análise de Dados</div>
+        <div class="skill-block-name">Power BI, DAX</div>
+        <div class="skill-block-level">Nível Básico</div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-block-area">Versionamento</div>
+        <div class="skill-block-name">Git, GitHub</div>
+        <div class="skill-block-level">Nível Básico</div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-block-area">Soft Skills</div>
+        <div class="skill-block-name">Trabalho em equipe, Prazos, Organização</div>
+        <div class="skill-block-level">Nível Avançado</div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-block-area">Disciplina</div>
+        <div class="skill-block-name">Hierarquia, Atenção a Detalhes</div>
+        <div class="skill-block-level">Nível Avançado</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICAÇÕES -->
+  <section id="certs">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2>Certificações e Cursos</h2>
+    </div>
+    <div class="certs-list">
+      <div class="cert-item">
+        <span class="cert-name">Algoritmos e Lógica de Programação — C++ | Python | Java</span>
+        <span class="cert-meta">Udemy · 40h · 2025</span>
+      </div>
+      <div class="cert-item">
+        <span class="cert-name">Banco de Dados e SQL</span>
+        <span class="cert-meta">Udemy · 58h · 2025</span>
+      </div>
+      <div class="cert-item">
+        <span class="cert-name">Programação em C++ — Básico ao Avançado</span>
+        <span class="cert-meta">Udemy · 18,5h · 2025</span>
+      </div>
+      <div class="cert-item">
+        <span class="cert-name">Master DAX — Power BI Orientado a Projetos</span>
+        <span class="cert-meta">Udemy · 17,5h · 2026</span>
+      </div>
+      <div class="cert-item">
+        <span class="cert-name">Master Power BI — Do Zero ao Avançado (A à Z)</span>
+        <span class="cert-meta">Udemy · 20,5h · 2026</span>
+      </div>
+      <div class="cert-item">
+        <span class="cert-name">Inglês — Nível Intermediário</span>
+        <span class="cert-meta">Curso de Idiomas</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECOMENDAÇÕES -->
+  <section id="rec">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2>Recomendações</h2>
+    </div>
+    <div class="rec-grid">
+      <div class="rec-card">
+        <div class="rec-quote">"</div>
+        <p class="rec-text">Víctor demonstrou dedicação exemplar, capacidade de trabalho em equipe e comprometimento com resultados ao longo do serviço militar. Sua organização e disciplina fazem dele um profissional confiável para qualquer ambiente de trabalho.</p>
+        <div class="rec-author">Superior hierárquico · Exército Brasileiro</div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-quote">"</div>
+        <p class="rec-text">Trabalhei com Víctor em projetos de edição e ele sempre entregou com qualidade e dentro do prazo. Profissional organizado, atencioso e de fácil comunicação.</p>
+        <div class="rec-author">Cliente · Projeto Freelancer</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>portfolioHUB · <span>Víctor Hugo Ferreira Matos</span> · CEUB – Engenharia de Software · Brasília, DF · 2026</p>
+  </footer>
+
+</body>
+</html>
