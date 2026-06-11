@@ -10,3 +10,6 @@ Portfólio digital centralizado para exibir projetos, habilidades e experiência
 - CSS
 - Git / GitHub
 - GitHub Pages
+
+## Acesso
+[Link do portfólio](https://github.com/f3rreiraa/portfolioHUB)
